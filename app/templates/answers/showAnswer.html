@@ -1,0 +1,30 @@
+<div class="panel {% if myLoop.first %} panel-warning
+                  {% else %} panel-success
+                  {% endif %}">
+    <div class="panel-heading">
+        <p>Date: {{ answer.timestamp.strftime('%d/%m/%Y') }}</p>
+        <p>Time: {{ answer.timestamp.strftime('%H:%M') }}</p>
+    </div>
+    <div class="panel-body">
+        {{ answer.body }}
+    </div>
+    <div class="panel-footer"><b>Other Options</b>
+        <p>Author - {{ answer.user_id }}</p>
+        {% if answer.user_id == current_user.id %}
+            <a class="btn btn-danger" aria-label="Right Align" href="/delete_answer/{{ answer.id }}">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Answer
+            </a>
+        {% endif %}
+        <button type="button" class="btn btn-warning" aria-label="Right Align">
+            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Report
+        </button>
+        <a class="btn btn-success" aria-label="Left Align" href="/answerlike/{{ answer.id }}">
+                            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Up-Vote
+                            <span class="badge">{{ answer.like }}</span>
+                    </a>
+        <a  class="btn btn-danger" aria-label="Left Align" href="/answerdislike/{{ answer.id }}">
+                            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Down-Vote
+                            <span class="badge">{{ answer.dislike }}</span>
+                    </a>
+    </div>
+</div>

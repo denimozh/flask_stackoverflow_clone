@@ -1,0 +1,48 @@
+<div class="panel panel-primary">
+                <div class="panel-heading">
+                        {{ question.title }}
+                </div>
+                <div class="panel-body">
+                        {{ question.body }}
+                </div>
+                <div class="panel-footer">Question Options</div>
+                {% if question in current_user.liked_questions %}
+                    <a class="btn btn-success" aria-label="Left Align" href="/unlike/{{ question.id }}">
+                            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Up-Vote
+                            <span class="badge">{{ question.likes }}</span>
+                    </a>
+                {% else %}
+                    <a class="btn btn-success" aria-label="Left Align" href="/like/{{ question.id }}">
+                            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Up-Vote
+                            <span class="badge">{{ question.likes }}</span>
+                    </a>
+                {% endif %}
+                {% if question in current_user.disliked_questions %}
+                    <a  class="btn btn-danger" aria-label="Left Align" href="/undislike/{{ question.id }}">
+                            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Down-Vote
+                            <span class="badge">{{ question.dislikes }}</span>
+                    </a>
+                {% else %}
+                    <a  class="btn btn-danger" aria-label="Left Align" href="/dislike/{{ question.id }}">
+                            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Down-Vote
+                            <span class="badge">{{ question.dislikes }}</span>
+                    </a>
+                {% endif %}
+                    <a class="btn btn-info" aria-label="Right Align" href="/answers/{{ question.id }}">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Create an answer
+                    </a>
+                    <button type="button" class="btn btn-warning" aria-label="Right Align">
+                            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Report
+                    </button>
+                    <a class="btn btn-link" aria-label="Right Align" href="/answers/{{ question.id }}">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> See All Answers
+                    </a>
+                {% if current_user.is_authenticated and question.user_id == current_user.id %}
+                    <a class="btn btn-danger" aria-label="Right Align" href="/deletequestion/{{ question.id }}">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Question
+                    </a>
+                    <a class="btn btn-warning" aria-label="Right Align" href="/edit/{{ question.id }}">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Question
+                    </a>
+                {% endif %}
+                </div>

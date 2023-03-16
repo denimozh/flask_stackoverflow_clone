@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'home/showQuestion.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% for answer in sorted_answers %}
+                    {% set myLoop = loop %}
+                    {% include 'answers/showAnswer.html' %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% if current_user.is_authenticated %}
+                    {{ wtf.quick_form(form) }}
+                {% else %}
+                    <div class="alert alert-danger" role="alert">You need to register/login to add a question</div>
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}

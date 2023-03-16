@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <div class="jumbotron">
+      <h1>Hello, {{ current_user.username }}</h1>
+        <p>Level <span class="badge">{{ current_user.level }}</span></p>
+      <h3>Rank: Newcomer</h3>
+            <div class="profile-details col-md-7">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" ><a href="/home">Return Home</a></button>
+                      </div>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><a href="/store">Rank Store</a></button>
+                      </div>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><a href="/profilesettings">Profile Settings</a></button>
+                      </div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="profile-details col-md-5">
+                    <h4>Profile Created On: {{ current_user.created_on.strftime('%d/%m/%Y') }}
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                    </h4>
+                    <h4>Profile total points: {{ current_user.points }}
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </h4>
+                </div>
+            </div>
+    </div>
+{% endblock %}
